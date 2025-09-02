@@ -2,7 +2,7 @@
 [![Code](https://img.shields.io/badge/GitHub-Code-blue)](https://github.com/astral-fate/BIG-IDEAs-Lab-Glycemic-Variability-and-Wearable-Device-Data)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-Page-F9D371)](https://huggingface.co/spaces/FatimahEmadEldin/BIG-IDEAs-Lab-Glycemic-Variability-and-Wearable-Device-Data)
 [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-Hugging%20Face-blue)](https://huggingface.co/datasets/FatimahEmadEldin/BIG-IDEAs-Lab-Glycemic-Variability-and-Wearable-Device-Data)
-![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fastral-fate%2FBIG-IDEAs-Lab-Glycemic-Variability-and-Wearable-Device-Data&label=BIG-IDEAs-Lab-Glycemic-Variability-and-Wearable-Device-Data&countColor=%23263759)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fastral-fate%2FBIG-IDEAs-Lab-Glycemic-Variability-and-Wearable-Device-Data&label=Visitors&countColor=%23697689)
 
 # BIG-IDEAs-Lab-Glycemic-Variability-and-Wearable-Device-Data
 
