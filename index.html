@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palm Farm Analytics - Tamra-Thon Report</title>
+    <title>عرض تقديمي تفاعلي - تحليلات مزارع النخيل</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap');
-
+        /* General Setup */
         :root {
-            --primary-green: #2E8B57;
-            --light-green: #3CB371;
-            --accent-gold: #FFD700;
-            --dark-bg: #1e1e20; /* A slightly softer dark background */
-            --slide-bg: #0c0c0d;
-            --text-color: #f0f0f0;
-            --text-muted: #a0a0a0;
+            --primary-color: #0c4b33;
+            --secondary-color: #f2a900;
+            --background-color: #ffffff;
+            --off-white-bg: #f7f4ed;
+            --text-color: #333;
+            --light-text-color: #f7f4ed;
         }
 
         * {
@@ -23,335 +24,514 @@
             padding: 0;
         }
 
-        html {
+        body, html {
+            height: 100%;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--off-white-bg);
+            color: var(--text-color);
+            overflow: hidden; /* Prevents default scrollbars */
+        }
+
+        /* Main scroll container */
+        .deck-container {
+            width: 100%;
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
         }
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            font-family: 'Cairo', 'Poppins', sans-serif;
+        /* Full-page wrapper for centering the slide */
+        .slide-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            padding: 20px;
         }
 
+        /* The 16:9 Slide Container */
         .slide {
-            /* This creates the 1920x1080 aspect ratio */
-            width: 90%;
-            max-width: 1920px;
-            aspect-ratio: 16 / 9;
-            height: auto; /* Height will be determined by the aspect ratio */
-            
-            margin: 3rem auto; /* Centers the slides and adds space between them */
-            padding: 4rem 6rem;
-            
-            background-color: var(--slide-bg);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-        }
-
-        .slide .content {
-            max-width: 1200px;
             width: 100%;
+            height: 100%;
+            max-width: 90vw;
+            max-height: calc(90vw * 9 / 16); /* Maintain aspect ratio based on width */
+            aspect-ratio: 16 / 9;
+            background-color: var(--background-color);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: clamp(1rem, 4vw, 3rem);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .slide {
+                max-height: 90vh;
+                max-width: calc(90vh * 16 / 9); /* Maintain aspect ratio based on height */
+            }
         }
         
-        /* Typography */
-        h1 { font-size: 4rem; font-weight: 900; margin-bottom: 1rem; text-shadow: 0 0 15px rgba(46, 139, 87, 0.5); }
-        h2 { font-size: 2.8rem; font-weight: 700; color: var(--primary-green); margin-bottom: 2rem; border-bottom: 3px solid var(--accent-gold); padding-bottom: 1rem; display: inline-block; }
-        h3 { font-size: 1.8rem; font-weight: 600; color: var(--light-green); margin-bottom: 1rem; }
-        p { font-size: 1.25rem; line-height: 1.8; color: var(--text-muted); max-width: 900px; margin: 0 auto 1.5rem auto; }
-        .highlight-green { color: var(--primary-green); font-weight: 700; }
-        .highlight-gold { color: var(--accent-gold); font-weight: 700; }
-
-        /* Layout Helpers */
-        .flex-container { display: flex; justify-content: space-around; align-items: flex-start; gap: 2rem; width: 100%; text-align: right; }
-        .column { flex: 1; padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .column ul { list-style: none; padding-right: 0; }
-        .column li { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-muted); }
-        .column li strong { color: var(--text-color); display: block; margin-bottom: 0.25rem; }
-
-        /* Tables */
-        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 10px; overflow: hidden; }
-        th, td { padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); }
-        th { background-color: var(--primary-green); color: white; font-family: 'Poppins', sans-serif; }
-        td { color: var(--text-muted); }
-        tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.05); }
-
-        /* Interactive Elements */
-        .cta-button { display: inline-block; background: var(--accent-gold); color: #111; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.2rem; margin-top: 2rem; transition: transform 0.3s, box-shadow 0.3s; }
-        .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+        /* Specific slide backgrounds */
+        #slide-1 {
+            background: linear-gradient(rgba(12, 75, 51, 0.85), rgba(12, 75, 51, 0.85)), url('https://images.unsplash.com/photo-16186321252 ২৬9-634453b6f002?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            color: var(--light-text-color);
+            background-size: cover;
+        }
         
-        /* --- THE MAGIC FOR PRINTING --- */
-        @media print {
-            body {
-                background-color: white; /* Print background should be white */
+        #slide-9 {
+             background: var(--primary-color);
+             color: var(--light-text-color);
+        }
+
+        .slide-content {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Responsive Typography */
+        .slide h1 {
+            font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5vh;
+            color: var(--primary-color);
+        }
+
+        #slide-1 h1, #slide-9 h1 {
+             color: var(--light-text-color);
+        }
+
+        .slide h2 {
+            font-size: clamp(1rem, 2.5vw, 2rem);
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-top: 2vh;
+        }
+
+        .slide p {
+            font-size: clamp(0.8rem, 1.8vw, 1.3rem);
+            line-height: 1.6;
+            margin: 0 auto 2vh auto;
+        }
+        
+        .slide .highlight {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* Card layout */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 2vw, 30px);
+            margin-top: 3vh;
+            flex-wrap: nowrap;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: clamp(10px, 2vw, 30px);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            flex: 1;
+            border-top: 5px solid var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card h3 {
+            font-size: clamp(0.9rem, 2vw, 1.5rem);
+            color: var(--primary-color);
+            margin-bottom: 1.5vh;
+        }
+
+        .card p, .card ul {
+            font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+            text-align: right;
+        }
+        
+        .card ul {
+            list-style-position: inside;
+            padding-right: 10px;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        /* Icon layout */
+        .icon-container {
+            display: flex;
+            justify-content: space-around;
+            gap: clamp(10px, 2vw, 40px);
+            margin-top: 4vh;
+            flex-wrap: nowrap;
+        }
+
+        .icon-item {
+           flex: 1;
+        }
+
+        .icon-item img {
+            width: clamp(40px, 6vw, 80px);
+            height: clamp(40px, 6vw, 80px);
+            margin-bottom: 1vh;
+        }
+        
+        .icon-item h3 {
+            font-size: clamp(0.8rem, 1.8vw, 1.4rem);
+            color: var(--primary-color);
+            margin-bottom: 1vh;
+        }
+
+        .icon-item p {
+            font-size: clamp(0.7rem, 1.4vw, 1rem);
+        }
+        
+        /* Demo Slide Specific Layout */
+        .demo-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5%;
+            width: 100%;
+            height: 100%;
+        }
+        .demo-image-wrapper {
+            flex: 1.2; /* Give more space to the image */
+        }
+        .demo-image-wrapper img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .demo-info-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-info-wrapper .qr-code {
+            width: 60%;
+            max-width: 250px;
+            aspect-ratio: 1/1;
+            margin-top: 2vh;
+            border-radius: 10px;
+        }
+
+        /* Navigation Buttons */
+        .navigation {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .navigation button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .navigation button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        
+        .navigation button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* Fade-in Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInAnimation 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            .slide {
-                width: 100%;
-                height: 98vh; /* Use vh to fill the printable area */
-                margin: 0;
-                border: none;
-                box-shadow: none;
-                page-break-after: always; /* This creates a new page after each slide */
-                page-break-inside: avoid;
-            }
-            h1, h2, p, th, td, strong, li {
-                color: black !important;
-            }
-            .column {
-                border: 1px solid #ccc;
-            }
-            .cta-button {
-                display: none; /* Hide buttons when printing */
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Slide 1: Title -->
-    <section class="slide">
-        <div class="content">
-            <p class="highlight-gold" style="font-size: 1.5rem;">مشروع مقدم لهاكاثون تمرة ثون</p>
-            <h1>تحليلات مزارع النخيل</h1>
-            <p style="font-size: 1.8rem; color: var(--text-color);">من القمر الصناعي إلى الاستراتيجية: نماذج تنبؤية للزراعة الذكية، الاستدامة، وسلاسل الإمداد</p>
-            <h3 style="margin-top: 3rem;">فاطمة عماد الدين | الجوهرة الحربي</h3>
-        </div>
-    </section>
+    <main class="deck-container">
 
-    <!-- Slide 2: Problem -->
-    <section class="slide">
-        <div class="content">
-            <h2>1. تحديد المشكلة: فجوة البيانات في قطاع التمور</h2>
-            <p>يواجه قطاع زراعة النخيل تحديات كبيرة في تحسين الإنتاج، إدارة المخلفات، ورفع كفاءة سلاسل الإمداد. المشكلة الجوهرية تكمن في غياب البيانات الدقيقة والفورية التي تمكّن من اتخاذ قرارات استراتيجية.</p>
-            <div class="flex-container">
-                <div class="column">
-                    <h3>🌱 الزراعة الذكية</h3>
-                    <p>حاجة المزارعين لأدوات تراقب صحة المحصول بشكل استباقي وتتنبأ بالمشاكل المحتملة.</p>
+        <!-- Slide 1: Title -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-1">
+                <div class="slide-content">
+                    <h1 class="fade-in">تحليلات مزارع النخيل</h1>
+                    <p class="fade-in" style="animation-delay: 0.5s;">من فضاء البيانات إلى ذكاء الأعمال القابل للتنفيذ</p>
+                    <h2 class="fade-in" style="animation-delay: 1s;">فريق ذات نخل | تمرة ثون</h2>
                 </div>
-                <div class="column">
-                    <h3>♻️ الاستدامة</h3>
-                    <p>صعوبة الاستفادة من مخلفات النخيل بسبب نقص البيانات حول حجمها ومواقعها، مما يعيق الخدمات اللوجستية لإعادة التدوير.</p>
-                </div>
-                <div class="column">
-                    <h3>🚚 سلاسل الإمداد</h3>
-                    <p>ضعف حلقة الوصل بين المنتجين والمستهلكين، وغياب الشفافية في التسعير مما يعقد التخطيط اللوجستي.</p>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Slide 3: Solution -->
-    <section class="slide">
-        <div class="content">
-            <h2>2. الحل المقترح: منظومة ذكاء تنبؤية متكاملة</h2>
-            <p>بدلاً من التركيز على حل واحد، قمنا بتطوير منظومة متكاملة من نماذج تعلم الآلة التي تحول البيانات الخام من الأقمار الصناعية إلى رؤى استراتيجية قابلة للتنفيذ، وفي قلبها **"مؤشر أداء المزرعة"** المبتكر.</p>
-            <div class="flex-container" style="align-items: center; margin-top: 2rem;">
-                <h3><span class="highlight-gold">النموذج الأول</span><br>تصنيف الأداء</h3>
-                <h1 style="font-size: 3rem; color: var(--light-green);">→</h1>
-                <h3><span class="highlight-gold">النموذج الثاني</span><br>كشف الحالات الشاذة</h3>
-                <h1 style="font-size: 3rem; color: var(--light-green);">→</h1>
-                <h3><span class="highlight-gold">النموذج الثالث</span><br>التنبؤ المستقبلي</h3>
-            </div>
+        <!-- Slide 2: The Problem -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-2">
+                <div class="slide-content">
+                    <h1 class="fade-in">المشكلة: أزمة انعدام الرؤية</h1>
+                    <div class="card-container">
+                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                            <h3>غموض السوق</h3>
+                            <p>لا يوجد أساس موضوعي لتقييم أداء المزارع، مما يخلق تقلبات في الأسعار بين المزارع والمورد.</p>
+                        </div>
+                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                            <h3>هدر هائل</h3>
+                            <p>يتم هدر <strong>800,000 طن</strong> من مخلفات النخيل سنوياً كفرصة اقتصادية ضائعة.</p>
+                        </div>
+                        <div class="card fade-in" style="animation-delay: 1.1s;">
+                            <h3>بنية رقمية ضعيفة</h3>
+                            <p><strong>90% من المزارع</strong> تعتمد على التعاملات الورقية بدون أي بصمة رقمية للمتابعة والتحليل.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
+        
+        <!-- Slide 3: The Solution (High Level) -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-3">
+                <div class="slide-content">
+                    <h1 class="fade-in">الحل: مؤشر أداء المزرعة</h1>
+                    <p class="fade-in" style="animation-delay: 0.5s;">منصة ثورية لا تتطلب أي أجهزة في المزرعة، فقط إحداثياتها.</p>
+                    <div class="icon-container">
+                        <div class="icon-item fade-in" style="animation-delay: 0.8s;">
+                            <img src="https://img.icons8.com/fluency/96/satellite.png" alt="Satellite Icon"/>
+                            <h3>بيانات الأقمار الصناعية</h3>
+                            <p>نستخدم بيانات مجانية من Sentinel-1 و Sentinel-2 لتحليل صحة النبات والمياه.</p>
+                        </div>
+                        <div class="icon-item fade-in" style="animation-delay: 1.1s;">
+                            <img src="https://img.icons8.com/fluency/96/artificial-intelligence.png" alt="AI Icon"/>
+                            <h3>الذكاء الاصطناعي</h3>
+                            <p>نماذج تعلم الآلة تكشف الحالات الشاذة وتتنبأ بصحة المحصول المستقبلية بدقة عالية.</p>
+                        </div>
+                         <div class="icon-item fade-in" style="animation-delay: 1.4s;">
+                            <img src="https://img.icons8.com/fluency/96/dashboard-layout.png" alt="Dashboard Icon"/>
+                            <h3>رؤى قابلة للتنفيذ</h3>
+                            <p>نحول الأرقام المعقدة إلى مؤشر أداء بسيط وفئات واضحة (ممتازة، قياسية، اقتصادية).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-    <!-- Slide 4: Track Alignment -->
-    <section class="slide">
-        <div class="content">
-            <h2>3. توافق الفكرة مع مسارات الهاكاثون</h2>
-            <p>نماذجنا توفر حلولاً مباشرة لجميع مسارات تمرة ثون الثلاثة.</p>
-            <div class="flex-container">
-                <div class="column">
-                    <h3>🥇 الزراعة الذكية</h3>
-                    <p><strong>نموذج كشف الحالات الشاذة</strong> يعمل كنظام إنذار مبكر، ينبه المزارعين فوراً عند حدوث أي تغيير مفاجئ في صحة المحصول، مما يسمح بالتدخل السريع قبل تفاقم المشكلة.</p>
+        <!-- Slide 4: The Data & Features -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-4">
+                <div class="slide-content">
+                    <h1 class="fade-in">وقودنا: بيانات الأقمار الصناعية</h1>
+                    <div class="card-container">
+                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                             <img src="https://img.icons8.com/fluency/96/radar.png" alt="Radar Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
+                            <h3>Sentinel-1: الرؤية الفيزيائية</h3>
+                            <p>باستخدام الرادار (SAR)، نحصل على بيانات ليلًا ونهارًا وفي كل الظروف الجوية لفهم:</p>
+                            <ul>
+                                <li><strong>رطوبة التربة:</strong> معرفة دقيقة لاحتياجات الري.</li>
+                                <li><strong>البنية التركيبية للنبات:</strong> مراقبة نمو وكثافة المزرعة.</li>
+                            </ul>
+                        </div>
+                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                            <img src="https://img.icons8.com/fluency/96/leaf.png" alt="Leaf Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
+                            <h3>Sentinel-2: الرؤية الكيميائية</h3>
+                            <p>باستخدام الطيف الضوئي، نستخلص مؤشرات حيوية لصحة النبات، أهمها:</p>
+                            <ul>
+                                <li><strong>NDVI:</strong> مؤشر كثافة وصحة الغطاء النباتي.</li>
+                                <li><strong>NDWI:</strong> مؤشر المحتوى المائي والإجهاد.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="column">
-                    <h3>♻️ الاستدامة</h3>
-                    <p><strong>نموذج تصنيف الأداء</strong> يستخدم مؤشر "الإنتاجية الإجمالية" للتنبؤ بحجم الكتلة الحيوية (المخلفات) لكل مزرعة، مما يتيح لشركات إعادة التدوير تخطيط مسارات جمع فعالة.</p>
-                </div>
-                <div class="column">
-                    <h3>🚚 سلاسل الإمداد</h3>
-                    <p><strong>المنظومة المتكاملة</strong> تتنبأ بتوقيت الحصاد، جودته، وكميته المتوقعة، مما يوفر شفافية غير مسبوقة للمشترين، يساعد المزارعين في التفاوض، ويمكّن شركات النقل من تحسين عملياتها.</p>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Slide 5: Model 1 - Clustering -->
-    <section class="slide">
-        <div class="content">
-            <h2>4. جودة الفكرة: نموذج تصنيف الأداء (التعلم غير الموجه)</h2>
-            <p>هذا هو نموذجنا الأساسي الذي يحلل الخصائص الفريدة لكل موسم زراعي لتصنيف المزارع موضوعياً.</p>
-            <h3>المميزات الهندسية التي يتعلم منها النموذج:</h3>
-            <p><span class="highlight-green">ذروة صحة المحصول (peak_ndvi)</span> • <span class="highlight-green">مدة موسم النمو (season_duration)</span> • <span class="highlight-green">متوسط الإجهاد المائي صيفاً (avg_ndwi_stress)</span> • <span class="highlight-green">مؤشر الإنتاجية الإجمالية (seasonal_integral)</span> • <span class="highlight-green">مؤشر استقرار النمو (ndvi_std_dev)</span></p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>الفئة</th><th>ذروة الصحة</th><th>مدة الموسم (يوم)</th><th>الإجهاد المائي</th><th>الإنتاجية الإجمالية</th><th>الاستقرار</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="highlight-gold">🥇 الفئة الممتازة</span></td>
-                        <td><strong>0.574</strong></td><td><strong>285</strong></td><td><strong>-0.422</strong></td><td><strong>18.65</strong></td><td>0.193</td>
-                    </tr>
-                    <tr>
-                        <td>🥈 الفئة القياسية</td>
-                        <td>0.072</td><td>35</td><td>-0.197</td><td>2.46</td><td><strong>0.015</strong></td>
-                    </tr>
-                    <tr>
-                        <td>🥉 الفئة الاقتصادية</td>
-                        <td>0.066</td><td>205</td><td>-0.217</td><td>0.32</td><td>0.018</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Slide 5: How it Works (Algorithms) -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-5">
+                <div class="slide-content">
+                    <h1 class="fade-in">تحت الغطاء: كيف تعمل خوارزمياتنا؟</h1>
+                    <div class="card-container">
+                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                            <img src="https://img.icons8.com/fluency/96/error.png" alt="Anomaly Detection Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
+                            <h3>الكشف المبكر عن المشاكل</h3>
+                            <p>باستخدام خوارزمية <span class="highlight">Isolation Forest</span>، ننشئ بصمة سلوكية لكل مزرعة. أي انحراف مفاجئ عن هذا السلوك الطبيعي يتم تحديده فوراً كحالة شاذة. <strong>هذا هو نظام الإنذار المبكر للأمراض والآفات.</strong></p>
+                        </div>
+                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                            <img src="https://img.icons8.com/fluency/96/bullish.png" alt="Forecasting Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
+                            <h3>التصنيف والتنبؤ الدقيق</h3>
+                            <p>تقوم خوارزمية <span class="highlight">K-Means Clustering</span> بتصنيف المزارع موضوعياً. ويتنبأ نموذج <span class="highlight">LightGBM</span> بصحة المحصول بدقة تصل إلى <span class="highlight">99.8%</span>. <strong>هذا يوفر أساساً موثوقاً للتسعير والتخطيط.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Slide 6: Models 2 & 3 - Supervised -->
-    <section class="slide">
-        <div class="content">
-            <h2>5. نماذج التنبؤ (التعلم الموجه)</h2>
-            <div class="flex-container">
-                <div class="column">
-                    <h3>🚨 نموذج كشف الحالات الشاذة</h3>
-                    <p>باستخدام نموذج <span class="highlight-green">Isolation Forest</span>، نحدد أي انحراف مفاجئ عن السلوك الطبيعي للمزرعة، مما يشير إلى مشكلة محتملة.</p>
-                    <p>تمكن النموذج من تحديد <strong>1,129</strong> حالة شاذة محتملة في البيانات، مما يسمح بتحليل دقيق وموجه للمشاكل.</p>
+        <!-- Slide 6: Value Proposition -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-6">
+                 <div class="slide-content">
+                    <h1 class="fade-in">قيمة حقيقية لكل الأطراف</h1>
+                    <div class="card-container">
+                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                            <h3>للمزارع (الزراعة الذكية)</h3>
+                            <p>نظام إنذار مبكر للأمراض، وتخطيط استباقي للمحاصيل، وقياس الأداء بموضوعية لتحسين الإنتاج.</p>
+                        </div>
+                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                            <h3>للمورد (سلاسل الإمداد)</h3>
+                            <p>شفافية غير مسبوقة لجودة المزارع، وتنبؤ بكميات الحصاد، مما يحسن التخطيط اللوجستي ويقلل المخاطر.</p>
+                        </div>
+                        <div class="card fade-in" style="animation-delay: 1.1s;">
+                            <h3>للاستدامة (إعادة التدوير)</h3>
+                            <p>تقدير حجم المخلفات الناتجة لتمهيد الطريق لإنشاء سوق فعال لإعادة تدويرها وتحويلها إلى قيمة.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="column">
-                    <h3>📈 نموذج التنبؤ المستقبلي لـ NDVI</h3>
-                    <p>باستخدام نموذج <span class="highlight-green">LightGBM</span> المُحسّن عبر <span class="highlight-green">Optuna</span>، نتنبأ بصحة المحصول لمدة 7 أيام قادمة بدقة عالية.</p>
-                    <p><strong>المميزات الرئيسية:</strong> بيانات الطقس، القيم السابقة لـ NDVI، والمؤشرات الموسمية.</p>
-                     <p style="font-size: 1.5rem;">دقة النموذج (R²): <span class="highlight-gold">0.9988</span></p>
+            </section>
+        </div>
+        
+        <!-- NEW Slide 7: Live Demo -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-7">
+                <div class="slide-content">
+                    <h1 class="fade-in">شاهد الفكرة على أرض الواقع</h1>
+                    <div class="demo-layout fade-in" style="animation-delay: 0.5s;">
+                        <div class="demo-image-wrapper">
+                            <img src="https://github.com/user-attachments/assets/3f05eb0b-8f53-48e0-8e19-ab3d592dc211" alt="Screenshot of the live demo dashboard">
+                        </div>
+                        <div class="demo-info-wrapper">
+                            <p>ندعوكم لتجربة النموذج الأولي بشكل مباشر. <strong>امسح الرمز</strong> بهاتفك الآن!</p>
+                            <img class="qr-code" src="https://github.com/user-attachments/assets/68d6c275-8ab9-4c25-bd43-1042d8e5f82a" alt="QR code linking to the demo">
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
-    
-    <!-- Slide 7: Prototype -->
-    <section class="slide">
-        <div class="content">
-            <h2>6. النموذج الأولي للحل</h2>
-            <p>قمنا بتطوير لوحة تحكم تفاعلية حية تعرض جميع نماذجنا، مما يتيح للمستخدمين استكشاف البيانات، تحليل أداء المزارع، والحصول على تنبؤات مستقبلية.</p>
-            <a href="https://huggingface.co/spaces/FatimahEmadEldin/Farm-Performance-Score" target="_blank" class="cta-button">شاهد العرض المباشر</a>
-        </div>
-    </section>
 
-    <!-- Slide 8: Impact -->
-    <section class="slide">
-         <div class="content">
-            <h2>7. مقياس قوة التأثير على المجتمع</h2>
-            <p>حلنا يقدم قيمة مضافة لجميع أصحاب المصلحة في قطاع التمور.</p>
-            <div class="flex-container">
-                <div class="column">
-                    <h3>للمزارعين</h3>
-                    <ul>
-                        <li><strong>زيادة الإنتاجية:</strong> عبر التدخل المبكر بناءً على التنبيهات.</li>
-                        <li><strong>ترشيد الموارد:</strong> تحسين استخدام المياه والأسمدة.</li>
-                        <li><strong>قوة تفاوضية:</strong> بيانات موضوعية لتسعير المحصول.</li>
-                    </ul>
+        <!-- Slide 8: Future Work -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-8">
+                <div class="slide-content">
+                    <h1 class="fade-in">الخطط المستقبلية: بناء نظام بيئي متكامل</h1>
+                     <div class="icon-container">
+                        <div class="icon-item fade-in" style="animation-delay: 0.8s;">
+                            <img src="https://img.icons8.com/fluency/96/palm-tree.png" alt="Digital Twin Palm Tree Icon"/>
+                            <h3>التوأم الرقمي للنخلة</h3>
+                            <p>بدمج بيانات الفضاء مع بيانات أرضية من تطبيق جوال (نوع الثمر، تسميد)، ننشئ هوية رقمية لكل نخلة لإدارة فائقة الدقة.</p>
+                        </div>
+                        <div class="icon-item fade-in" style="animation-delay: 1.1s;">
+                            <img src="https://img.icons8.com/fluency/96/erp-system.png" alt="ERP System Icon"/>
+                            <h3>نظام متكامل لإدارة المزرعة (ERP)</h3>
+                            <p>تتحول منصتنا إلى نظام ERP ذكي لإدارة العمليات والموارد (العمالة، التكاليف) وتحسين الربحية بناءً على البيانات الدقيقة.</p>
+                        </div>
+                         <div class="icon-item fade-in" style="animation-delay: 1.4s;">
+                            <img src="https://img.icons8.com/fluency/96/investment.png" alt="Investment Icon"/>
+                            <h3>دمقرطة الاستثمار الزراعي</h3>
+                            <p>تحويل المزارع الموثوقة والشفافة إلى أصول استثمارية متاحة للأفراد، مما يفتح آفاقاً جديدة للتمويل في القطاع الزراعي.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="column">
-                    <h3>للشركات والقطاع</h3>
-                    <ul>
-                        <li><strong>كفاءة لوجستية:</strong> تخطيط مسبق لعمليات النقل وإعادة التدوير.</li>
-                        <li><strong>شفافية السوق:</strong> بيانات موحدة عن جودة وكمية الإنتاج المتوقع.</li>
-                        <li><strong>استدامة معززة:</strong> تحويل المخلفات إلى مصدر دخل.</li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h3>للمملكة</h3>
-                    <ul>
-                        <li><strong>أمن غذائي:</strong> تعزيز الإنتاج المحلي من التمور.</li>
-                        <li><strong>اقتصاد دائري:</strong> دعم صناعات إعادة تدوير المخلفات.</li>
-                        <li><strong>ريادة رقمية:</strong> تطبيق أحدث تقنيات الذكاء الاصطناعي في قطاع حيوي.</li>
-                    </ul>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
+        
+        <!-- Slide 9: Conclusion -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-9">
+                <div class="slide-content">
+                    <h1 class="fade-in">نحن نزرع بذور الحصاد الرقمي</h1>
+                    <p class="fade-in" style="animation-delay: 0.5s;">حلنا ليس مجرد فكرة، بل هو نظام بيئي يعزز الاستدامة، الربحية، والشفافية في قطاع النخيل السعودي.</p>
+                    <h2 class="fade-in" style="animation-delay: 1s;">فريق ذات نخل. شكراً لكم.</h2>
+                </div>
+            </section>
+        </div>
 
-    <!-- Slide 9: Uniqueness -->
-    <section class="slide">
-        <div class="content">
-            <h2>8. التميز والإبداع</h2>
-            <p>ما الذي يميز حلنا عن الحلول الأخرى؟</p>
-             <div class="flex-container">
-                <div class="column">
-                    <h3>منظومة متكاملة</h3>
-                    <p>لا نقدم مجرد نموذج واحد، بل منظومة مترابطة تحل مشاكل متعددة من نفس مصدر البيانات.</p>
-                </div>
-                <div class="column">
-                    <h3>تصنيف موضوعي</h3>
-                    <p>نظام "مؤشر أداء المزرعة" هو الأول من نوعه الذي يعتمد على التعلم غير الموجه لتصنيف المزارع بموضوعية.</p>
-                </div>
-                 <div class="column">
-                    <h3>تنبؤات واقعية</h3>
-                    <p>نموذج التنبؤ الخاص بنا يدمج بيانات الطقس ويتعلم من الأنماط التاريخية لتقديم توقعات قابلة للتطبيق على أرض الواقع.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    </main>
 
-    <!-- Slide 10: Implementation Plan -->
-    <section class="slide">
-        <div class="content">
-            <h2>9. خطة تطبيق الحلول والأفكار</h2>
-            <p>لدينا رؤية واضحة لتطوير الحل وضمان استدامته.</p>
-             <div class="flex-container">
-                <div class="column">
-                    <h3>المرحلة 1: النموذج الأولي (مكتملة)</h3>
-                    <p>بناء النماذج الأساسية وإطلاق لوحة التحكم التفاعلية على منصة Hugging Face.</p>
-                </div>
-                <div class="column">
-                    <h3>المرحلة 2: البرنامج التجريبي</h3>
-                    <p>الشراكة مع عدد من المزارع لتطبيق الحل، التحقق من دقة التنبيهات، وجمع الملاحظات الميدانية.</p>
-                </div>
-                 <div class="column">
-                    <h3>المرحلة 3: الإطلاق التجاري</h3>
-                    <p>توفير الحل كخدمة (SaaS) للمزارع والشركات والجهات الحكومية مع تطوير مستمر للنماذج.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Slide 11: Team -->
-    <section class="slide">
-        <div class="content">
-            <h2>10. أعضاء الفريق</h2>
-            <table>
-                <thead>
-                    <tr><th>الاسم</th><th>الدور</th></tr>
-                </thead>
-                <tbody>
-                    <!-- UPDATE HERE -->
-                    <tr>
-                        <td>فاطمة عماد الدين</td>
-                        <td>قائدة الفريق | مهندسة تعلم الآلة</td>
-                    </tr>
-                    <tr>
-                        <td>الجوهرة الحربي</td>
-                        <td>محللة بيانات | مطورة واجهة المستخدم</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    <div class="navigation">
+        <button id="prevBtn" title="السابق">▲</button>
+        <button id="nextBtn" title="التالي">▼</button>
+    </div>
 
-    <!-- Slide 12: Thank You -->
-    <section class="slide">
-        <div class="content">
-            <h1 class="highlight-green">شكراً لكم</h1>
-            <p>مستعدون للإجابة على أسئلتكم.</p>
-            <a href="https://huggingface.co/spaces/FatimahEmadEldin/Farm-Performance-Score" target="_blank" class="cta-button">استكشف النموذج الأولي</a>
-        </div>
-    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deckContainer = document.querySelector('.deck-container');
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            let currentSlideIndex = 0;
+            
+            if(slideWrappers.length === 0) return;
 
+            const slideHeight = slideWrappers[0].clientHeight;
+
+            function updateButtons() {
+                prevBtn.disabled = currentSlideIndex === 0;
+                nextBtn.disabled = currentSlideIndex === slideWrappers.length - 1;
+            }
+
+            function scrollToSlide(index) {
+                if(index < 0 || index >= slideWrappers.length) return;
+                
+                deckContainer.scrollTo({
+                    top: index * slideHeight,
+                    behavior: 'smooth'
+                });
+                currentSlideIndex = index;
+                updateButtons();
+            }
+
+            nextBtn.addEventListener('click', () => {
+                scrollToSlide(currentSlideIndex + 1);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                scrollToSlide(currentSlideIndex - 1);
+            });
+
+            let scrollTimeout;
+            deckContainer.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const newIndex = Math.round(deckContainer.scrollTop / slideHeight);
+                    if (newIndex !== currentSlideIndex) {
+                        currentSlideIndex = newIndex;
+                        updateButtons();
+                    }
+                }, 150);
+            });
+            
+            updateButtons();
+        });
+    </script>
 </body>
 </html>
+
