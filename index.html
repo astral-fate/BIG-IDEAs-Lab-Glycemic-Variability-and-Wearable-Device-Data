@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض تقديمي تفاعلي - تحليلات مزارع النخيل</title>
+    <title>عرض تقديمي - تحليلات مزارع النخيل (نسخة للطباعة)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
             --primary-color: #0c4b33;
             --secondary-color: #f2a900;
             --background-color: #ffffff;
-            --off-white-bg: #f7f4ed;
+            --page-bg: #e8e8e8;
             --text-color: #333;
             --light-text-color: #f7f4ed;
         }
@@ -24,32 +24,25 @@
             padding: 0;
         }
 
-        body, html {
-            height: 100%;
+        body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--off-white-bg);
+            background-color: var(--page-bg);
             color: var(--text-color);
-            overflow: hidden; /* Prevents default scrollbars */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
-        /* Main scroll container */
+        /* Main container for all slides */
         .deck-container {
             width: 100%;
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
+            max-width: 1200px; /* Limits width on very large screens for better readability */
+            margin: 0 auto;
+            padding: 20px 0;
         }
 
-        /* Full-page wrapper for centering the slide */
+        /* Wrapper for each slide, providing spacing */
         .slide-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-            scroll-snap-align: start;
-            padding: 20px;
+            padding: 30px;
         }
 
         /* The 16:9 Slide Container */
@@ -59,29 +52,19 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 100%;
-            max-width: 90vw;
-            max-height: calc(90vw * 9 / 16); /* Maintain aspect ratio based on width */
             aspect-ratio: 16 / 9;
             background-color: var(--background-color);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             padding: clamp(1rem, 4vw, 3rem);
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        @media (min-aspect-ratio: 16/9) {
-            .slide {
-                max-height: 90vh;
-                max-width: calc(90vh * 16 / 9); /* Maintain aspect ratio based on height */
-            }
+            border-radius: 10px;
         }
         
         /* Specific slide backgrounds */
         #slide-1 {
-            background: linear-gradient(rgba(12, 75, 51, 0.85), rgba(12, 75, 51, 0.85)), url('https://images.unsplash.com/photo-16186321252 ২৬9-634453b6f002?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background: linear-gradient(rgba(12, 75, 51, 0.85), rgba(12, 75, 51, 0.85)), url('https://images.unsplash.com/photo-1618632125269-634453b6f002?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
             color: var(--light-text-color);
             background-size: cover;
         }
@@ -98,7 +81,7 @@
 
         /* Responsive Typography */
         .slide h1 {
-            font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+            font-size: clamp(1.5rem, 3.5vw, 3rem);
             font-weight: 900;
             margin-bottom: 1.5vh;
             color: var(--primary-color);
@@ -109,14 +92,14 @@
         }
 
         .slide h2 {
-            font-size: clamp(1rem, 2.5vw, 2rem);
+            font-size: clamp(1rem, 2vw, 1.8rem);
             font-weight: 700;
             color: var(--secondary-color);
             margin-top: 2vh;
         }
 
         .slide p {
-            font-size: clamp(0.8rem, 1.8vw, 1.3rem);
+            font-size: clamp(0.8rem, 1.5vw, 1.2rem);
             line-height: 1.6;
             margin: 0 auto 2vh auto;
         }
@@ -137,23 +120,23 @@
 
         .card {
             background-color: #ffffff;
-            padding: clamp(10px, 2vw, 30px);
+            padding: clamp(10px, 2vw, 25px);
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             flex: 1;
-            border-top: 5px solid var(--secondary-color);
+            border-top: 4px solid var(--secondary-color);
             display: flex;
             flex-direction: column;
         }
         
         .card h3 {
-            font-size: clamp(0.9rem, 2vw, 1.5rem);
+            font-size: clamp(0.9rem, 1.8vw, 1.4rem);
             color: var(--primary-color);
             margin-bottom: 1.5vh;
         }
 
         .card p, .card ul {
-            font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+            font-size: clamp(0.7rem, 1.3vw, 1rem);
             text-align: right;
         }
         
@@ -163,7 +146,7 @@
         }
 
         .card li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         /* Icon layout */
@@ -180,19 +163,19 @@
         }
 
         .icon-item img {
-            width: clamp(40px, 6vw, 80px);
-            height: clamp(40px, 6vw, 80px);
+            width: clamp(40px, 5vw, 70px);
+            height: clamp(40px, 5vw, 70px);
             margin-bottom: 1vh;
         }
         
         .icon-item h3 {
-            font-size: clamp(0.8rem, 1.8vw, 1.4rem);
+            font-size: clamp(0.8rem, 1.6vw, 1.3rem);
             color: var(--primary-color);
             margin-bottom: 1vh;
         }
 
         .icon-item p {
-            font-size: clamp(0.7rem, 1.4vw, 1rem);
+            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
         }
         
         /* Demo Slide Specific Layout */
@@ -203,9 +186,10 @@
             gap: 5%;
             width: 100%;
             height: 100%;
+            padding: 0 5%;
         }
         .demo-image-wrapper {
-            flex: 1.2; /* Give more space to the image */
+            flex: 1.2;
         }
         .demo-image-wrapper img {
             width: 100%;
@@ -221,62 +205,34 @@
         }
         .demo-info-wrapper .qr-code {
             width: 60%;
-            max-width: 250px;
+            max-width: 200px;
             aspect-ratio: 1/1;
             margin-top: 2vh;
             border-radius: 10px;
         }
 
-        /* Navigation Buttons */
-        .navigation {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 100;
-        }
-
-        .navigation button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .navigation button:hover {
-            background-color: var(--secondary-color);
-            transform: scale(1.1);
-        }
-        
-        .navigation button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-
-        /* Fade-in Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInAnimation 0.8s ease-out forwards;
-        }
-
-        @keyframes fadeInAnimation {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        /* Print-specific styles */
+        @media print {
+            body {
+                background-color: #ffffff; /* White background for printing */
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .deck-container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+            }
+            .slide-wrapper {
+                padding: 0;
+                page-break-after: always; /* Each slide on a new page */
+            }
+            .slide {
+                box-shadow: none; /* Remove shadows for printing */
+                border-radius: 0;
+                height: 100vh; /* Make slide take up full page height */
+            }
+            /* Hide the last page break */
+            .slide-wrapper:last-child {
+                page-break-after: auto;
             }
         }
     </style>
@@ -289,9 +245,9 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-1">
                 <div class="slide-content">
-                    <h1 class="fade-in">تحليلات مزارع النخيل</h1>
-                    <p class="fade-in" style="animation-delay: 0.5s;">من فضاء البيانات إلى ذكاء الأعمال القابل للتنفيذ</p>
-                    <h2 class="fade-in" style="animation-delay: 1s;">فريق ذات نخل | تمرة ثون</h2>
+                    <h1>تحليلات مزارع النخيل</h1>
+                    <p>من فضاء البيانات إلى ذكاء الأعمال القابل للتنفيذ</p>
+                    <h2>فريق ذات نخل | تمرة ثون</h2>
                 </div>
             </section>
         </div>
@@ -300,17 +256,17 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-2">
                 <div class="slide-content">
-                    <h1 class="fade-in">المشكلة: أزمة انعدام الرؤية</h1>
+                    <h1>المشكلة: أزمة انعدام الرؤية</h1>
                     <div class="card-container">
-                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                        <div class="card">
                             <h3>غموض السوق</h3>
                             <p>لا يوجد أساس موضوعي لتقييم أداء المزارع، مما يخلق تقلبات في الأسعار بين المزارع والمورد.</p>
                         </div>
-                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                        <div class="card">
                             <h3>هدر هائل</h3>
                             <p>يتم هدر <strong>800,000 طن</strong> من مخلفات النخيل سنوياً كفرصة اقتصادية ضائعة.</p>
                         </div>
-                        <div class="card fade-in" style="animation-delay: 1.1s;">
+                        <div class="card">
                             <h3>بنية رقمية ضعيفة</h3>
                             <p><strong>90% من المزارع</strong> تعتمد على التعاملات الورقية بدون أي بصمة رقمية للمتابعة والتحليل.</p>
                         </div>
@@ -323,20 +279,20 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-3">
                 <div class="slide-content">
-                    <h1 class="fade-in">الحل: مؤشر أداء المزرعة</h1>
-                    <p class="fade-in" style="animation-delay: 0.5s;">منصة ثورية لا تتطلب أي أجهزة في المزرعة، فقط إحداثياتها.</p>
+                    <h1>الحل: مؤشر أداء المزرعة</h1>
+                    <p>منصة ثورية لا تتطلب أي أجهزة في المزرعة، فقط إحداثياتها.</p>
                     <div class="icon-container">
-                        <div class="icon-item fade-in" style="animation-delay: 0.8s;">
+                        <div class="icon-item">
                             <img src="https://img.icons8.com/fluency/96/satellite.png" alt="Satellite Icon"/>
                             <h3>بيانات الأقمار الصناعية</h3>
                             <p>نستخدم بيانات مجانية من Sentinel-1 و Sentinel-2 لتحليل صحة النبات والمياه.</p>
                         </div>
-                        <div class="icon-item fade-in" style="animation-delay: 1.1s;">
+                        <div class="icon-item">
                             <img src="https://img.icons8.com/fluency/96/artificial-intelligence.png" alt="AI Icon"/>
                             <h3>الذكاء الاصطناعي</h3>
                             <p>نماذج تعلم الآلة تكشف الحالات الشاذة وتتنبأ بصحة المحصول المستقبلية بدقة عالية.</p>
                         </div>
-                         <div class="icon-item fade-in" style="animation-delay: 1.4s;">
+                         <div class="icon-item">
                             <img src="https://img.icons8.com/fluency/96/dashboard-layout.png" alt="Dashboard Icon"/>
                             <h3>رؤى قابلة للتنفيذ</h3>
                             <p>نحول الأرقام المعقدة إلى مؤشر أداء بسيط وفئات واضحة (ممتازة، قياسية، اقتصادية).</p>
@@ -350,9 +306,9 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-4">
                 <div class="slide-content">
-                    <h1 class="fade-in">وقودنا: بيانات الأقمار الصناعية</h1>
+                    <h1>وقودنا: بيانات الأقمار الصناعية</h1>
                     <div class="card-container">
-                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                        <div class="card">
                              <img src="https://img.icons8.com/fluency/96/radar.png" alt="Radar Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
                             <h3>Sentinel-1: الرؤية الفيزيائية</h3>
                             <p>باستخدام الرادار (SAR)، نحصل على بيانات ليلًا ونهارًا وفي كل الظروف الجوية لفهم:</p>
@@ -361,7 +317,7 @@
                                 <li><strong>البنية التركيبية للنبات:</strong> مراقبة نمو وكثافة المزرعة.</li>
                             </ul>
                         </div>
-                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                        <div class="card">
                             <img src="https://img.icons8.com/fluency/96/leaf.png" alt="Leaf Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
                             <h3>Sentinel-2: الرؤية الكيميائية</h3>
                             <p>باستخدام الطيف الضوئي، نستخلص مؤشرات حيوية لصحة النبات، أهمها:</p>
@@ -379,14 +335,14 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-5">
                 <div class="slide-content">
-                    <h1 class="fade-in">تحت الغطاء: كيف تعمل خوارزمياتنا؟</h1>
+                    <h1>تحت الغطاء: كيف تعمل خوارزمياتنا؟</h1>
                     <div class="card-container">
-                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                        <div class="card">
                             <img src="https://img.icons8.com/fluency/96/error.png" alt="Anomaly Detection Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
                             <h3>الكشف المبكر عن المشاكل</h3>
                             <p>باستخدام خوارزمية <span class="highlight">Isolation Forest</span>، ننشئ بصمة سلوكية لكل مزرعة. أي انحراف مفاجئ عن هذا السلوك الطبيعي يتم تحديده فوراً كحالة شاذة. <strong>هذا هو نظام الإنذار المبكر للأمراض والآفات.</strong></p>
                         </div>
-                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                        <div class="card">
                             <img src="https://img.icons8.com/fluency/96/bullish.png" alt="Forecasting Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
                             <h3>التصنيف والتنبؤ الدقيق</h3>
                             <p>تقوم خوارزمية <span class="highlight">K-Means Clustering</span> بتصنيف المزارع موضوعياً. ويتنبأ نموذج <span class="highlight">LightGBM</span> بصحة المحصول بدقة تصل إلى <span class="highlight">99.8%</span>. <strong>هذا يوفر أساساً موثوقاً للتسعير والتخطيط.</strong></p>
@@ -400,17 +356,17 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-6">
                  <div class="slide-content">
-                    <h1 class="fade-in">قيمة حقيقية لكل الأطراف</h1>
+                    <h1>قيمة حقيقية لكل الأطراف</h1>
                     <div class="card-container">
-                        <div class="card fade-in" style="animation-delay: 0.5s;">
+                        <div class="card">
                             <h3>للمزارع (الزراعة الذكية)</h3>
                             <p>نظام إنذار مبكر للأمراض، وتخطيط استباقي للمحاصيل، وقياس الأداء بموضوعية لتحسين الإنتاج.</p>
                         </div>
-                        <div class="card fade-in" style="animation-delay: 0.8s;">
+                        <div class="card">
                             <h3>للمورد (سلاسل الإمداد)</h3>
                             <p>شفافية غير مسبوقة لجودة المزارع، وتنبؤ بكميات الحصاد، مما يحسن التخطيط اللوجستي ويقلل المخاطر.</p>
                         </div>
-                        <div class="card fade-in" style="animation-delay: 1.1s;">
+                        <div class="card">
                             <h3>للاستدامة (إعادة التدوير)</h3>
                             <p>تقدير حجم المخلفات الناتجة لتمهيد الطريق لإنشاء سوق فعال لإعادة تدويرها وتحويلها إلى قيمة.</p>
                         </div>
@@ -419,12 +375,12 @@
             </section>
         </div>
         
-        <!-- NEW Slide 7: Live Demo -->
+        <!-- Slide 7: Live Demo -->
         <div class="slide-wrapper">
             <section class="slide" id="slide-7">
                 <div class="slide-content">
-                    <h1 class="fade-in">شاهد الفكرة على أرض الواقع</h1>
-                    <div class="demo-layout fade-in" style="animation-delay: 0.5s;">
+                    <h1>شاهد الفكرة على أرض الواقع</h1>
+                    <div class="demo-layout">
                         <div class="demo-image-wrapper">
                             <img src="https://github.com/user-attachments/assets/3f05eb0b-8f53-48e0-8e19-ab3d592dc211" alt="Screenshot of the live demo dashboard">
                         </div>
@@ -441,19 +397,19 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-8">
                 <div class="slide-content">
-                    <h1 class="fade-in">الخطط المستقبلية: بناء نظام بيئي متكامل</h1>
+                    <h1>الخطط المستقبلية: بناء نظام بيئي متكامل</h1>
                      <div class="icon-container">
-                        <div class="icon-item fade-in" style="animation-delay: 0.8s;">
+                        <div class="icon-item">
                             <img src="https://img.icons8.com/fluency/96/palm-tree.png" alt="Digital Twin Palm Tree Icon"/>
                             <h3>التوأم الرقمي للنخلة</h3>
                             <p>بدمج بيانات الفضاء مع بيانات أرضية من تطبيق جوال (نوع الثمر، تسميد)، ننشئ هوية رقمية لكل نخلة لإدارة فائقة الدقة.</p>
                         </div>
-                        <div class="icon-item fade-in" style="animation-delay: 1.1s;">
+                        <div class="icon-item">
                             <img src="https://img.icons8.com/fluency/96/erp-system.png" alt="ERP System Icon"/>
                             <h3>نظام متكامل لإدارة المزرعة (ERP)</h3>
                             <p>تتحول منصتنا إلى نظام ERP ذكي لإدارة العمليات والموارد (العمالة، التكاليف) وتحسين الربحية بناءً على البيانات الدقيقة.</p>
                         </div>
-                         <div class="icon-item fade-in" style="animation-delay: 1.4s;">
+                         <div class="icon-item">
                             <img src="https://img.icons8.com/fluency/96/investment.png" alt="Investment Icon"/>
                             <h3>دمقرطة الاستثمار الزراعي</h3>
                             <p>تحويل المزارع الموثوقة والشفافة إلى أصول استثمارية متاحة للأفراد، مما يفتح آفاقاً جديدة للتمويل في القطاع الزراعي.</p>
@@ -467,71 +423,14 @@
         <div class="slide-wrapper">
             <section class="slide" id="slide-9">
                 <div class="slide-content">
-                    <h1 class="fade-in">نحن نزرع بذور الحصاد الرقمي</h1>
-                    <p class="fade-in" style="animation-delay: 0.5s;">حلنا ليس مجرد فكرة، بل هو نظام بيئي يعزز الاستدامة، الربحية، والشفافية في قطاع النخيل السعودي.</p>
-                    <h2 class="fade-in" style="animation-delay: 1s;">فريق ذات نخل. شكراً لكم.</h2>
+                    <h1>نحن نزرع بذور الحصاد الرقمي</h1>
+                    <p>حلنا ليس مجرد فكرة، بل هو نظام بيئي يعزز الاستدامة، الربحية، والشفافية في قطاع النخيل السعودي.</p>
+                    <h2>فريق ذات نخل. شكراً لكم.</h2>
                 </div>
             </section>
         </div>
 
     </main>
-
-    <div class="navigation">
-        <button id="prevBtn" title="السابق">▲</button>
-        <button id="nextBtn" title="التالي">▼</button>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const deckContainer = document.querySelector('.deck-container');
-            const slideWrappers = document.querySelectorAll('.slide-wrapper');
-            const nextBtn = document.getElementById('nextBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            let currentSlideIndex = 0;
-            
-            if(slideWrappers.length === 0) return;
-
-            const slideHeight = slideWrappers[0].clientHeight;
-
-            function updateButtons() {
-                prevBtn.disabled = currentSlideIndex === 0;
-                nextBtn.disabled = currentSlideIndex === slideWrappers.length - 1;
-            }
-
-            function scrollToSlide(index) {
-                if(index < 0 || index >= slideWrappers.length) return;
-                
-                deckContainer.scrollTo({
-                    top: index * slideHeight,
-                    behavior: 'smooth'
-                });
-                currentSlideIndex = index;
-                updateButtons();
-            }
-
-            nextBtn.addEventListener('click', () => {
-                scrollToSlide(currentSlideIndex + 1);
-            });
-
-            prevBtn.addEventListener('click', () => {
-                scrollToSlide(currentSlideIndex - 1);
-            });
-
-            let scrollTimeout;
-            deckContainer.addEventListener('scroll', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    const newIndex = Math.round(deckContainer.scrollTop / slideHeight);
-                    if (newIndex !== currentSlideIndex) {
-                        currentSlideIndex = newIndex;
-                        updateButtons();
-                    }
-                }, 150);
-            });
-            
-            updateButtons();
-        });
-    </script>
 </body>
 </html>
 
