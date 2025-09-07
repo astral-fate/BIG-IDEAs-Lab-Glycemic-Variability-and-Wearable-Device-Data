@@ -113,14 +113,15 @@
         .card-container {
             display: flex;
             justify-content: center;
-            gap: clamp(10px, 2vw, 30px);
+            gap: clamp(10px, 1.5vw, 20px);
             margin-top: 3vh;
             flex-wrap: nowrap;
+            align-items: stretch; /* Make cards same height */
         }
 
         .card {
             background-color: #ffffff;
-            padding: clamp(10px, 2vw, 25px);
+            padding: clamp(10px, 1.5vw, 20px);
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             flex: 1;
@@ -130,19 +131,21 @@
         }
         
         .card h3 {
-            font-size: clamp(0.9rem, 1.8vw, 1.4rem);
+            font-size: clamp(0.9rem, 1.6vw, 1.3rem);
             color: var(--primary-color);
             margin-bottom: 1.5vh;
         }
 
         .card p, .card ul {
-            font-size: clamp(0.7rem, 1.3vw, 1rem);
+            font-size: clamp(0.7rem, 1.2vw, 1rem);
             text-align: right;
+            line-height: 1.5;
         }
         
         .card ul {
             list-style-position: inside;
             padding-right: 10px;
+            text-align: right;
         }
 
         .card li {
@@ -302,28 +305,40 @@
             </section>
         </div>
 
-        <!-- Slide 4: The Data & Features -->
+        <!-- UPDATED Slide 4: The Data & Features -->
         <div class="slide-wrapper">
             <section class="slide" id="slide-4">
                 <div class="slide-content">
-                    <h1>وقودنا: بيانات الأقمار الصناعية</h1>
+                    <h1>وقودنا: من البيانات الأولية إلى المقاييس الذكية</h1>
                     <div class="card-container">
                         <div class="card">
-                             <img src="https://img.icons8.com/fluency/96/radar.png" alt="Radar Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
-                            <h3>Sentinel-1: الرؤية الفيزيائية</h3>
-                            <p>باستخدام الرادار (SAR)، نحصل على بيانات ليلًا ونهارًا وفي كل الظروف الجوية لفهم:</p>
+                             <img src="https://img.icons8.com/fluency/96/radar.png" alt="Radar Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
+                            <h3>Sentinel-1 (الرؤية الفيزيائية)</h3>
+                            <p>يوفر بيانات الرادار (SAR) التي تقيس:</p>
                             <ul>
-                                <li><strong>رطوبة التربة:</strong> معرفة دقيقة لاحتياجات الري.</li>
-                                <li><strong>البنية التركيبية للنبات:</strong> مراقبة نمو وكثافة المزرعة.</li>
+                                <li><strong>رطوبة التربة</strong></li>
+                                <li><strong>البنية التركيبية للنبات</strong></li>
                             </ul>
                         </div>
                         <div class="card">
-                            <img src="https://img.icons8.com/fluency/96/leaf.png" alt="Leaf Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
-                            <h3>Sentinel-2: الرؤية الكيميائية</h3>
-                            <p>باستخدام الطيف الضوئي، نستخلص مؤشرات حيوية لصحة النبات، أهمها:</p>
+                            <img src="https://img.icons8.com/fluency/96/leaf.png" alt="Leaf Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
+                            <h3>Sentinel-2 (المؤشرات الحيوية)</h3>
+                            <p>نستخلص من الطيف الضوئي مؤشرات أساسية:</p>
                             <ul>
-                                <li><strong>NDVI:</strong> مؤشر كثافة وصحة الغطاء النباتي.</li>
-                                <li><strong>NDWI:</strong> مؤشر المحتوى المائي والإجهاد.</li>
+                                <li><strong>NDVI:</strong> صحة وكثافة النبات.</li>
+                                <li><strong>NDWI:</strong> المحتوى المائي والإجهاد.</li>
+                                <li><strong>SAVI:</strong> صحة النبات مع عزل تأثير التربة.</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <img src="https://img.icons8.com/fluency/96/test-tube.png" alt="Engineered Features Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
+                            <h3>المقاييس المُهندسة (ذكاؤنا)</h3>
+                            <p>نحول المؤشرات إلى رؤى أعمق لقياس:</p>
+                            <ul>
+                                <li><strong>ذروة الموسم (Peak NDVI)</strong></li>
+                                <li><strong>الإنتاجية الإجمالية (Integral)</strong></li>
+                                <li><strong>استقرار النمو (Std Dev)</strong></li>
+                                <li><strong>مدة الموسم (Duration)</strong></li>
                             </ul>
                         </div>
                     </div>
@@ -338,14 +353,19 @@
                     <h1>تحت الغطاء: كيف تعمل خوارزمياتنا؟</h1>
                     <div class="card-container">
                         <div class="card">
-                            <img src="https://img.icons8.com/fluency/96/error.png" alt="Anomaly Detection Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
-                            <h3>الكشف المبكر عن المشاكل</h3>
-                            <p>باستخدام خوارزمية <span class="highlight">Isolation Forest</span>، ننشئ بصمة سلوكية لكل مزرعة. أي انحراف مفاجئ عن هذا السلوك الطبيعي يتم تحديده فوراً كحالة شاذة. <strong>هذا هو نظام الإنذار المبكر للأمراض والآفات.</strong></p>
+                            <img src="https://img.icons8.com/fluency/96/error.png" alt="Anomaly Detection Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
+                            <h3>الكشف عن الحالات الشاذة</h3>
+                            <p>باستخدام <span class="highlight">Isolation Forest</span>، نحدد أي انحراف مفاجئ عن السلوك الطبيعي للمزرعة، مما يوفر <strong>إنذاراً مبكراً</strong> للأمراض والآفات.</p>
                         </div>
                         <div class="card">
-                            <img src="https://img.icons8.com/fluency/96/bullish.png" alt="Forecasting Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
-                            <h3>التصنيف والتنبؤ الدقيق</h3>
-                            <p>تقوم خوارزمية <span class="highlight">K-Means Clustering</span> بتصنيف المزارع موضوعياً. ويتنبأ نموذج <span class="highlight">LightGBM</span> بصحة المحصول بدقة تصل إلى <span class="highlight">99.8%</span>. <strong>هذا يوفر أساساً موثوقاً للتسعير والتخطيط.</strong></p>
+                            <img src="https://img.icons8.com/?size=100&id=5qzpYc5HfmXu&format=png&color=000000" alt="Clustering Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
+                            <h3>تصنيف أداء المزارع</h3>
+                            <p>من خلال <span class="highlight">K-Means Clustering</span>، نقوم بتجميع المزارع في فئات أداء موضوعية (ممتازة، قياسية)، مما يخلق <strong>معياراً شفافاً</strong> للسوق.</p>
+                        </div>
+                        <div class="card">
+                            <img src="https://img.icons8.com/fluency/96/bullish.png" alt="Forecasting Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
+                            <h3>التنبؤ بصحة المحصول</h3>
+                            <p>يتنبأ نموذج <span class="highlight">LightGBM</span> بصحة المحصول المستقبلية بدقة <span class="highlight">99.8%</span>، مما يمنح المزارعين أداة قوية <strong>للتخطيط الاستباقي</strong>.</p>
                         </div>
                     </div>
                 </div>
