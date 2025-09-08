@@ -35,7 +35,7 @@
         /* Main container for all slides */
         .deck-container {
             width: 100%;
-            max-width: 1200px; /* Limits width on very large screens for better readability */
+            max-width: 1200px; /* Limits width on very large screens */
             margin: 0 auto;
             padding: 20px 0;
         }
@@ -69,7 +69,7 @@
             background-size: cover;
         }
         
-        #slide-9 {
+        #slide-12 {
              background: var(--primary-color);
              color: var(--light-text-color);
         }
@@ -78,6 +78,36 @@
             width: 100%;
             max-width: 1200px;
         }
+        
+        .two-panel-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5%;
+            width: 100%;
+            height: 100%;
+            padding: 0 5%;
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel-text {
+            text-align: right;
+        }
+        
+        .panel-visual img {
+            width: 100%;
+            max-height: 80%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
 
         /* Responsive Typography */
         .slide h1 {
@@ -87,7 +117,7 @@
             color: var(--primary-color);
         }
 
-        #slide-1 h1, #slide-9 h1 {
+        #slide-1 h1, #slide-12 h1 {
              color: var(--light-text-color);
         }
 
@@ -150,6 +180,12 @@
 
         .card li {
             margin-bottom: 6px;
+        }
+        
+        .card svg {
+            width: 100%;
+            margin-top: auto; /* Pushes SVG to the bottom */
+            padding-top: 10px;
         }
 
         /* Icon layout */
@@ -233,7 +269,6 @@
                 border-radius: 0;
                 height: 100vh; /* Make slide take up full page height */
             }
-            /* Hide the last page break */
             .slide-wrapper:last-child {
                 page-break-after: auto;
             }
@@ -255,23 +290,24 @@
             </section>
         </div>
 
-        <!-- Slide 2: The Problem -->
+        <!-- Slide 2: The Problem (MODIFIED) -->
         <div class="slide-wrapper">
             <section class="slide" id="slide-2">
                 <div class="slide-content">
-                    <h1>المشكلة: أزمة انعدام الرؤية</h1>
+                    <h1>المشكلة: فجوة رقمية تعيق النمو</h1>
+                    <p>يواجه قطاع النخيل تحديات هيكلية تبطئ من تحوله الرقمي وتحد من إمكانياته الكامنة لتحقيق الأمن الغذائي والربحية.</p>
                     <div class="card-container">
                         <div class="card">
-                            <h3>غموض السوق</h3>
-                            <p>لا يوجد أساس موضوعي لتقييم أداء المزارع، مما يخلق تقلبات في الأسعار بين المزارع والمورد.</p>
+                            <h3>فجوة تبني التقنية</h3>
+                            <p><strong>31% فقط</strong> من المزارعين يستخدمون تطبيقات الإرشاد الرقمي، والأغلبية العظمى لا تزال تعتمد على الممارسات الورقية التقليدية.</p>
                         </div>
                         <div class="card">
-                            <h3>هدر هائل</h3>
-                            <p>يتم هدر <strong>800,000 طن</strong> من مخلفات النخيل سنوياً كفرصة اقتصادية ضائعة.</p>
+                            <h3>عوائق الزراعة الذكية (IoT)</h3>
+                            <p>التكاليف الباهظة، وضعف البنية التحتية (كهرباء وإنترنت)، والتعقيد التقني تمنع تركيب وتشغيل أجهزة الاستشعار في معظم المزارع.</p>
                         </div>
                         <div class="card">
-                            <h3>بنية رقمية ضعيفة</h3>
-                            <p><strong>90% من المزارع</strong> تعتمد على التعاملات الورقية بدون أي بصمة رقمية للمتابعة والتحليل.</p>
+                            <h3>إدارة تفاعلية للمخاطر</h3>
+                            <p>تعتمد الممارسات الحالية على التعامل مع المشاكل (كالآفات والأمراض) بعد وقوعها، مما يسبب خسائر سنوية ضخمة بدلاً من الوقاية الاستباقية.</p>
                         </div>
                     </div>
                 </div>
@@ -305,76 +341,142 @@
             </section>
         </div>
 
-        <!-- UPDATED Slide 4: The Data & Features -->
+        <!-- Slide 4: Raw Satellite Data -->
         <div class="slide-wrapper">
             <section class="slide" id="slide-4">
                 <div class="slide-content">
-                    <h1>وقودنا: من البيانات الأولية إلى المقاييس الذكية</h1>
+                    <h1>وقودنا: بيانات الأقمار الصناعية</h1>
                     <div class="card-container">
                         <div class="card">
-                             <img src="https://img.icons8.com/fluency/96/radar.png" alt="Radar Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
-                            <h3>Sentinel-1 (الرؤية الفيزيائية)</h3>
-                            <p>يوفر بيانات الرادار (SAR) التي تقيس:</p>
+                             <img src="https://img.icons8.com/fluency/96/radar.png" alt="Radar Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
+                            <h3>Sentinel-1: الرؤية الفيزيائية (SAR)</h3>
+                            <p>تقنية <strong>الرادار ذو الفتحة الاصطناعية (SAR)</strong> تخترق السحب والظلام لتزويدنا ببيانات متواصلة عن:</p>
                             <ul>
-                                <li><strong>رطوبة التربة</strong></li>
-                                <li><strong>البنية التركيبية للنبات</strong></li>
+                                <li><strong>رطوبة التربة الفعلية.</strong></li>
+                                <li><strong>البنية الهيكلية للنباتات وكثافتها.</strong></li>
                             </ul>
                         </div>
                         <div class="card">
-                            <img src="https://img.icons8.com/fluency/96/leaf.png" alt="Leaf Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
-                            <h3>Sentinel-2 (المؤشرات الحيوية)</h3>
-                            <p>نستخلص من الطيف الضوئي مؤشرات أساسية:</p>
-                            <ul>
-                                <li><strong>NDVI:</strong> صحة وكثافة النبات.</li>
-                                <li><strong>NDWI:</strong> المحتوى المائي والإجهاد.</li>
-                                <li><strong>SAVI:</strong> صحة النبات مع عزل تأثير التربة.</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <img src="https://img.icons8.com/fluency/96/test-tube.png" alt="Engineered Features Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
-                            <h3>المقاييس المُهندسة (ذكاؤنا)</h3>
-                            <p>نحول المؤشرات إلى رؤى أعمق لقياس:</p>
-                            <ul>
-                                <li><strong>ذروة الموسم (Peak NDVI)</strong></li>
-                                <li><strong>الإنتاجية الإجمالية (Integral)</strong></li>
-                                <li><strong>استقرار النمو (Std Dev)</strong></li>
-                                <li><strong>مدة الموسم (Duration)</strong></li>
-                            </ul>
+                            <img src="https://img.icons8.com/fluency/96/leaf.png" alt="Leaf Icon" style="width: 60px; height: 60px; margin-bottom: 10px; align-self: center;">
+                            <h3>Sentinel-2: الرؤية الكيميائية (ضوئي)</h3>
+                            <p>تلتقط صوراً متعددة الأطياف في الضوء المرئي والأشعة تحت الحمراء، والتي نستخدمها لحساب المؤشرات الحيوية.</p>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- Slide 5: How it Works (Algorithms) -->
+        <!-- Slide 5: Feature Engineering -->
         <div class="slide-wrapper">
             <section class="slide" id="slide-5">
                 <div class="slide-content">
-                    <h1>تحت الغطاء: كيف تعمل خوارزمياتنا؟</h1>
+                    <h1>هندسة السمات: تحويل البيانات إلى ذكاء</h1>
+                    <p>نحن لا نستخدم البيانات الأولية مباشرة، بل نهندسها لنخلق مقاييس ذات معنى عميق لأداء المزرعة.</p>
                     <div class="card-container">
                         <div class="card">
-                            <img src="https://img.icons8.com/fluency/96/error.png" alt="Anomaly Detection Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
-                            <h3>الكشف عن الحالات الشاذة</h3>
-                            <p>باستخدام <span class="highlight">Isolation Forest</span>، نحدد أي انحراف مفاجئ عن السلوك الطبيعي للمزرعة، مما يوفر <strong>إنذاراً مبكراً</strong> للأمراض والآفات.</p>
+                            <h3>1. حساب المؤشرات الأولية</h3>
+                            <ul>
+                                <li><strong>NDVI:</strong> لقياس صحة وكثافة النباتات.</li>
+                                <li><strong>NDWI:</strong> لقياس المحتوى المائي والإجهاد.</li>
+                                <li><strong>SAVI:</strong> لقياس صحة النبات مع عزل تأثير التربة.</li>
+                            </ul>
                         </div>
                         <div class="card">
-                            <img src="https://img.icons8.com/?size=100&id=5qzpYc5HfmXu&format=png&color=000000" alt="Clustering Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
-                            <h3>تصنيف أداء المزارع</h3>
-                            <p>من خلال <span class="highlight">K-Means Clustering</span>، نقوم بتجميع المزارع في فئات أداء موضوعية (ممتازة، قياسية)، مما يخلق <strong>معياراً شفافاً</strong> للسوق.</p>
-                        </div>
-                        <div class="card">
-                            <img src="https://img.icons8.com/fluency/96/bullish.png" alt="Forecasting Icon" style="width: 50px; height: 50px; margin-bottom: 10px; align-self: center;">
-                            <h3>التنبؤ بصحة المحصول</h3>
-                            <p>يتنبأ نموذج <span class="highlight">LightGBM</span> بصحة المحصول المستقبلية بدقة <span class="highlight">99.8%</span>، مما يمنح المزارعين أداة قوية <strong>للتخطيط الاستباقي</strong>.</p>
+                            <h3>2. بناء مقاييس الأداء السنوي</h3>
+                            <ul>
+                                <li><strong>ذروة الموسم (Peak NDVI):</strong> أعلى مستوى صحة وصلت له المزرعة.</li>
+                                <li><strong>الإنتاجية الإجمالية (Integral):</strong> إجمالي "الطاقة الخضراء" خلال الموسم.</li>
+                                <li><strong>استقرار النمو (Std Dev):</strong> مدى تذبذب صحة المزرعة.</li>
+                                <li><strong>مدة الموسم (Duration):</strong> طول فترة النمو النشط.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- Slide 6: Value Proposition -->
+        <!-- Slide 6: Anomaly Detection -->
         <div class="slide-wrapper">
             <section class="slide" id="slide-6">
+                <div class="slide-content">
+                     <h1>الخوارزمية (1): الكشف عن الحالات الشاذة</h1>
+                     <div class="two-panel-layout">
+                        <div class="panel panel-visual">
+                             <img src="https://private-user-images.githubusercontent.com/63984422/486584465-de7b033b-249b-4ebb-b66e-b7e966469e4d.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTczMDQ3NjgsIm5iZiI6MTc1NzMwNDQ2OCwicGF0aCI6Ii82Mzk4NDQyMi80ODY1ODQ0NjUtZGU3YjAzM2ItMjQ5Yi00ZWJiLWI2NmUtYjdlOTY2NDY5ZTRkLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA5MDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwOTA4VDA0MDc0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTNlMjQ0Nzg3ZGY5ZmUzZmI0N2IxNjdmNDZkMTRhZWE5ZWZjNWVlNjU5Mjg5NDlkMzcxM2E5YzlkN2IwMTkxZWQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.TtNLaroU2h52E2PGI1K0QINqi3o6GytnDXpDWbFwAIM">
+                        </div>
+                        <div class="panel panel-text">
+                            <p>نراقب السلوك التاريخي لكل مزرعة عبر حساب "خط أساس" طبيعي لصحة النبات (المتوسط المتحرك لمؤشر NDVI). أي انحراف كبير ومفاجئ عن هذا الخط (مثل هبوط حاد) يُعتبر حالة شاذة تستدعي الانتباه الفوري.</p>
+                            <h2>هذا هو نظام الإنذار المبكر للأمراض والآفات.</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Slide 7: Clustering -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-7">
+                 <div class="slide-content">
+                     <h1>الخوارزمية (2): تصنيف أداء المزارع</h1>
+                     <div class="two-panel-layout">
+                        <div class="panel panel-visual">
+                             <img src="https://private-user-images.githubusercontent.com/63984422/486585714-232e84b3-c790-45b3-b849-82879f821324.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTczMDQ3NjgsIm5iZiI6MTc1NzMwNDQ2OCwicGF0aCI6Ii82Mzk4NDQyMi80ODY1ODU3MTQtMjMyZTg0YjMtYzc5MC00NWIzLWI4NDktODI4NzlmODIxMzI0LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA5MDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwOTA4VDA0MDc0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc4YTYzOTM0MzQwYzgxMGE3YzVlNzA0ZjkzNDU0MDI5Yjk2YjIyMWQ0ZGQ2NTkwYzVkMTUyZGYwZTNiNjAxZTgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.z746KzbpdJAyMckOt9pm6Xmml_kvNEZ2GK1jl6j1xZM" alt="Clustering result visualization">
+                        </div>
+                        <div class="panel panel-text">
+                            <p>صنّف التعلم غير الموجه (K-Means) المزارع إلى ثلاث فئات حسب مقاييس الأداء. قمنا باختبار النموذج على بيانات من "مزارع للزينة" مثل مزرعة المربد، وقد تم تصنيفها بشكل صحيح ضمن الفئة الثالثة (الاقتصادية)، مما يؤكد دقة الخوارزمية في التمييز بين أنواع المزارع المختلفة.</p>
+                             <h2>هذا يخلق معياراً شفافاً وموثوقاً للسوق.</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Slide 8: Forecasting -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-8">
+                 <div class="slide-content">
+                     <h1>الخوارزمية (3): التنبؤ بصحة المحصول</h1>
+                     <div class="two-panel-layout">
+                        <div class="panel panel-visual">
+                           <svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                    <marker id="arrowhead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#0c4b33" />
+                                    </marker>
+                                </defs>
+                                <!-- Inputs -->
+                                <rect x="10" y="5" width="100" height="25" rx="5" fill="#f2a900" />
+                                <text x="60" y="22" font-size="10" fill="#333" text-anchor="middle">متوسط NDVI</text>
+                                <rect x="10" y="45" width="100" height="25" rx="5" fill="#f2a900" />
+                                <text x="60" y="62" font-size="10" fill="#333" text-anchor="middle">متوسط EVI</text>
+                                <rect x="10" y="85" width="100" height="25" rx="5" fill="#f2a900" />
+                                <text x="60" y="102" font-size="10" fill="#333" text-anchor="middle">الانحراف المعياري لـNDVI</text>
+                                <!-- Process Box -->
+                                <rect x="140" y="40" width="80" height="40" rx="5" fill="#0c4b33" />
+                                <text x="180" y="57" font-size="10" fill="#f7f4ed" text-anchor="middle">LightGBM</text>
+                                <text x="180" y="72" font-size="10" fill="#f7f4ed" text-anchor="middle">Model</text>
+                                <!-- Output -->
+                                <rect x="250" y="47.5" width="60" height="25" rx="5" fill="#f2a900" />
+                                <text x="280" y="64.5" font-size="12" fill="#333" text-anchor="middle" font-weight="bold">R² > 0.99</text>
+                                <!-- Arrows -->
+                                <line x1="110" y1="17.5" x2="140" y2="60" stroke="#0c4b33" stroke-width="2" marker-end="url(#arrowhead)" />
+                                <line x1="110" y1="57.5" x2="140" y2="60" stroke="#0c4b33" stroke-width="2" marker-end="url(#arrowhead)" />
+                                <line x1="110" y1="97.5" x2="140" y2="60" stroke="#0c4b33" stroke-width="2" marker-end="url(#arrowhead)" />
+                                <line x1="220" y1="60" x2="250" y2="60" stroke="#0c4b33" stroke-width="2" marker-end="url(#arrowhead)" />
+                            </svg>
+                        </div>
+                        <div class="panel panel-text">
+                            <p>باستخدام السمات الحيوية الرئيسية، يتنبأ نموذج <span class="highlight">LightGBM</span> المتقدم بصحة المحصول المستقبلية، محققاً دقة مذهلة بمعامل تحديد (R²) يتجاوز <span class="highlight">99%</span>.</p>
+                             <h2>هذا يمنح المزارعين أداة قوية للتخطيط الاستباقي واتخاذ القرارات بثقة.</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Slide 9: Value Proposition -->
+        <div class="slide-wrapper">
+            <section class="slide" id="slide-9">
                  <div class="slide-content">
                     <h1>قيمة حقيقية لكل الأطراف</h1>
                     <div class="card-container">
@@ -395,9 +497,9 @@
             </section>
         </div>
         
-        <!-- Slide 7: Live Demo -->
+        <!-- Slide 10: Live Demo -->
         <div class="slide-wrapper">
-            <section class="slide" id="slide-7">
+            <section class="slide" id="slide-10">
                 <div class="slide-content">
                     <h1>شاهد الفكرة على أرض الواقع</h1>
                     <div class="demo-layout">
@@ -413,9 +515,9 @@
             </section>
         </div>
 
-        <!-- Slide 8: Future Work -->
+        <!-- Slide 11: Future Work -->
         <div class="slide-wrapper">
-            <section class="slide" id="slide-8">
+            <section class="slide" id="slide-11">
                 <div class="slide-content">
                     <h1>الخطط المستقبلية: بناء نظام بيئي متكامل</h1>
                      <div class="icon-container">
@@ -439,9 +541,9 @@
             </section>
         </div>
         
-        <!-- Slide 9: Conclusion -->
+        <!-- Slide 12: Conclusion -->
         <div class="slide-wrapper">
-            <section class="slide" id="slide-9">
+            <section class="slide" id="slide-12">
                 <div class="slide-content">
                     <h1>نحن نزرع بذور الحصاد الرقمي</h1>
                     <p>حلنا ليس مجرد فكرة، بل هو نظام بيئي يعزز الاستدامة، الربحية، والشفافية في قطاع النخيل السعودي.</p>
@@ -453,4 +555,3 @@
     </main>
 </body>
 </html>
-
